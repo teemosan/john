@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gala Galore (Pangasinan)</title>
+<style>
+    #map-canvas{
+        height:800px;
+        width:100%;
+    }
+    .container {
+        width: 560px;
+        height: 100vh;
+        background-color: #fff;
+        margin: 0 auto;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <center><input type="text" id="mapsearch" placeholder="Search place here.." size="50"></center>
+    <div id="map-canvas"></div>
+    
+<script>
+function initMap(){
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+          lat: 15.8949,
+          lng: 120.2863
+        },
+        zoom: 10
+      });
+
+
+    // Array of markers
+    var markers = [
+    {
+    coords:{lat: 16.382411, lng: 119.883853},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left' height: 100px; width: 100px;><img src='church/catholic.jpg'></div><div style='float:left; padding: 10px;'><b>Catholic Church</b><br/>Arnedo, Saturnino Camangian, <br>Bolinao, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.388720, lng: 119.893849 },
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. james.jpg'></div><div style='float:left; padding: 10px;'><b>St. James Great Parish Church</b><br/>Don Alonzo Ponce <br>Bolinao, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.289647, lng: 119.948174},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. nicholas.jpg'></div><div style='float:left; padding: 10px;'><b>Saint Nicholas de Tolentino Parish</b><br/>Anda Rd<br>Anda, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.116947, lng: 119.799739},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Catherine.jpg'></div><div style='float:left; padding: 10px;'><b>Saint Catherine of Alexandria Parish Church</b><br/>Agno, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.788954, lng: 120.294482},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Raymund.jpg'></div><div style='float:left; padding: 10px;'><b>Saint Raymund de Peñafort Parish</b><br>Mangatarem, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.888588, lng: 120.239024},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Joseph.jpg'></div><div style='float:left; padding: 10px;'><b>St. Joseph the Patriarch Parish Church</b><br/>Romulo Hwy <br>Aguilar, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.955081, lng: 120.214934},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. andrew.jpg'></div><br><div style='float:left; padding: 10px;'><b>Saint Andrew the Apostle Parish</b><br>Bugallon, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.979889, lng: 120.219507},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Lourdes.jpg'></div><br><div style='float:left; padding: 10px;'><b>Our Lady of Lourdes Shrine</b><br>Bugallon, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.066935, lng: 120.095502},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Peter.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Peter the Martyr Church</b><br>Sual, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.155370, lng: 119.978493},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. joseph ca.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Joseph Cathedral</b><br>CP Garcia St, Poblacion<br>Alaminos, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.007052, lng: 120.195943},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Rose.jpg'></div><br><div style='float:left; padding: 10px;'><b>Parish of St. Rose of Lima - Lingayen</b><br>Domalandan, Lingayen</div>"
+    },
+     {
+    coords:{lat: 16.021829, lng: 120.231478},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Ephiphany.jpg'></div><br><div style='float:left; padding: 10px;'><b>Ephiphany of our Lord Parish</b><br>Poblacion, Lingayen, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.030305, lng: 120.268863},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Binmaley.jpg'></div><br><div style='float:left; padding: 10px;'><b>Binmaley Church</b><br>Binmaley, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.040593, lng: 120.340022},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Therese.jpg'></div><br><div style='float:left; padding: 10px;'><b>Saint Therese Parish Church</b><br>Rizal St, Downtown District,<br>Dagupan, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.926607, lng: 120.347129},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Dominic.jpg'></div><br><div style='float:left; padding: 10px;'><b>Saint Dominic Parish Church</b><br>Malong St, San Carlos City, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.010076, lng: 120.356945},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Paul.jpg'></div><br><div style='float:left; padding: 10px;'><b>STS. Peter & Paul Parish</b><br>Calasiao, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.000345, lng: 120.403051},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/holy fam.jpg'></div><br><div style='float:left; padding: 10px;'><b>Holy Family Parish Church</b><br>Marcelino Bautista Street<br>Santa Barbara, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.122345, lng: 120.401316},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Fabian.jpg'></div><br><div style='float:left; padding: 10px;'><b>Parish Of St. Fabian Pope And Martyr</b><br>Braganza Street, San Fabian, Pangasinan</div>"
+    },
+      {
+    coords:{lat: 16.073713, lng: 120.437338},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/san Jacinto.jpg'></div><br><div style='float:left; padding: 10px;'><b>San Jacinto Parish Church</b><br>San Jacinto, Pangasinan</div>"
+    },
+      {
+    coords:{lat: 16.044116, lng: 120.488215},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Manaoag.jpg'></div><br><div style='float:left; padding: 10px;'><b>Minor Basilica of Our Lady of the Rosary of Manaoag</b><br>Milo St, Manaoag, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.821148, lng: 120.330105},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Pius.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Pius V Parish Church</b><br>San Pio St, Urbiztondo, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.808807, lng: 120.455980},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Vincent.jpg'></div><br><div style='float:left; padding: 10px;'><b>Saint Vincent Ferrer Parish</b><br>Bayambang, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.844953, lng: 120.521205},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/holy Cross.jpg'></div><br><div style='float:left; padding: 10px;'><b>Holy Cross Parish Church - Roman Catholic</b><br>Alcala, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.874339, lng:  120.574824},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Thomas.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Thomas Aquinas Parish Church</b><br>Carmen - Alcala Rd, Santo Tomas, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.849510, lng:  120.398217},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/mary Help.jpg'></div><br><div style='float:left; padding: 10px;'><b>Mary Help of Christians Parish</b><br>Basista, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.919524, lng:  120.413392},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/san Ildefonso.jpg'></div><br><div style='float:left; padding: 10px;'><b>San Ildefonso Parish Church</b><br>Malasiqui, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.005934, lng:  120.668482},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Louis.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Louis Bertrand Parish Church</b><br>Asingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.896947, lng:  120.671729},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Balungao.jpg'></div><br><div style='float:left; padding: 10px;'><b>Saint Joseph Parish Church</b><br>Balungao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.793620, lng:  120.552224},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/siena Parish.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Catherine Of Siena Parish</b><br>Villanueva, Bautista, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.051296, lng:  120.570769},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Raphael.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Raphael the Archangel Parish Church</b><br>Binalonan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.044745, lng:  120.593062},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/sto. Nino.jpg'></div><br><div style='float:left; padding: 10px;'><b>Sto. Nino Parish Church</b><br>October 16 St, Binalonan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.042294, lng:  120.334417},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/sto. John.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. John Evangelist Cathedral</b><br>Dagupan, Pangasinan<br></div>"
+    },
+    {
+    coords:{lat: 15.911813, lng:  119.883212},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Dasol.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Raphael the Archangel Parish</b><br>National Road, Eguia, Dasol, Pangasinan<br></div>"
+    },
+    {
+    coords:{lat: 15.911813, lng:  119.883212},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Dasol.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Raphael the Archangel Parish</b><br>National Road, Eguia, Dasol, Pangasinan<br></div>"
+    },
+    {
+    coords:{lat: 15.825955, lng:  119.905450},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Infanta.jpg'></div><br><div style='float:left; padding: 10px;'><b>St.John the Evangelist</b><br>Infanta, Pangasinan<br></div>"
+    },
+    {
+    coords:{lat: 16.068674, lng:  119.940963},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Mabini.jpg'></div><br><div style='float:left; padding: 10px;'><b>Sto. Niño Parish Church</b><br>Mabini, Pangasinan<br></div>"
+    },
+    {
+    coords:{lat: 16.040112, lng:  120.428196},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Mangaldan.jpg'></div><br><div style='float:left; padding: 10px;'><b>Miraculous Medal Parish</b><br>Mangaldan, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 16.025694, lng:  120.454211},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Mapandan.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Joseph The Patriarch Parish</b><br>Municipal St, Mapandan, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 16.044346, lng:  120.797982},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'></div><br><div style='float:left; padding: 10px;'><b>Our Lady's Nativity Parish Church</b><br>Perez-Lago St, Natividad, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 16.111458, lng:  120.545261},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Jude.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Jude Thaddeus Parish Church</b><br>Pozorrubio, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 15.892215, lng:  120.632319},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Anthony.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Anthony of Padua Parish - Rosales</b><br>Rosales, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 15.879362, lng:  120.326286},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/san Carlos.jpg'></div><br><div style='float:left; padding: 10px;'><b>Saint Joseph, Husband of Mary Parish (Malacañang)</b><br>San Carlos City, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 15.796839, lng:  120.606868},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/san Manuel.jpg'></div><br><div style='float:left; padding: 10px;'><b>Our Lady Of Remedies Parish Church</b><br>San Manuel, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 16.070048, lng:  120.762023},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/san Nicolas.jpg'></div><br><div style='float:left; padding: 10px;'><b>San Nicolas Parish Church</b><br>San Nicolas, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 15.984492, lng:  120.813095},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/st. Paschal.jpg'></div><br><div style='float:left; padding: 10px;'><b>St. Paschal Baylon Parish Church</b><br>San Quintin, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 16.158484, lng:  120.545047},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Sison.jpg'></div><br><div style='float:left; padding: 10px;'><b>Our Lady Of Mount Carmel Parish</b><br>Sison, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 15.979068, lng:  120.700434},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Sta. Maria.jpg'></div><br><div style='float:left; padding: 10px;'><b>Our Lady of the Pillar Parish Church</b><br>Sta. Maria, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 16.028792, lng:  120.744449},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/St. Patrick.jpg'></div><br><div style='float:left; padding: 10px;'><b>Saint Patrick Parish</b><br>Rizal Street, Tayug, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 15.925527, lng:  120.841347},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Umingan.jpg'></div><br><div style='float:left; padding: 10px;'><b>OUR LADY OF THE IMMACULATE CONCEPTION PARISH</b><br>Umingan, Pangasinan<br></div>"
+    },
+     {
+    coords:{lat: 15.983282, lng:  120.512927},
+    iconImage: "markers/church.png",
+    content: "<div style='float:left'><img src='church/Urdaneta.jpg'></div><br><div style='float:left; padding: 10px;'><b>Our Lady, Queen of the Universe Parish Church</b><br>Urdaneta City, Pangasinan<br></div>"
+    }
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+    }
+
+    // Add marker Function
+    function addMarker(props){
+       var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+        icon:props.iconImage
+      });
+    
+    // Check content
+    if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+            content:props.content, 
+            maxWidth: 300, 
+            maxHeight: 300
+        });
+
+    marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+        });
+
+    
+    // Searchbox
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('mapsearch'));
+
+    //Place change event on search box
+    google.maps.event.addListener(searchBox, 'places_changed', function(){
+      
+      //console.log(searchBox.getPlaces());
+      var places = searchBox.getPlaces();
+
+      //bound
+      var bounds = new google.maps.LatLngBounds();
+      var i, place;
+
+      for (i=0; place=places[i]; i++) {
+
+        //console.log(place.geometry.location);
+        bounds.extend(place.geometry.location);
+      }
+      map.fitBounds(bounds); //fit to bound
+      map.setZoom(15); //set zoom
+        });  
+        }  
+    }
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAyiED6i4cjfxPYsLOiJl3gnMujfjWAM08&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>
