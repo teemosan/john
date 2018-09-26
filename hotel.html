@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gala Galore (Pangasinan)</title>
+<style>
+    body{
+        background-color: gold; 
+    }
+    #map-canvas{
+        height:630px;
+        width:100%;
+    }
+    .container {
+        width: 560px;
+        height: 100vh;
+        background-color: gold;
+        margin: 0 auto;
+    }
+    input[type=text] {
+        color: black;
+        font-family: Berlin Sans FB;
+        width: 87%;
+        border--sizing:border--box;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 20px;
+        background: white;
+        background-image:url('image/search.png');
+        background-size:30px 30px;
+        background-position: 5px 5px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        margin-top: 10px;
+    }
+    .logo {
+    width: 550px;
+    padding: 2px;
+    }
+    .logo1 {
+    width: 200px;
+    padding: 0px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <img src="image/header3.png" alt="" class="logo">
+    </header>
+    <center><input type="text" id="mapsearch" placeholder="Search place here.."></center><br>
+    <div id="map-canvas"></div>
+    <br>
+    <header>
+        <center><img src="image/logo.png" alt="" class="logo1"></center>
+    </header>
+    
+<script>
+    function initMap(){
+      var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+          lat: 15.8949,
+          lng: 120.2863
+        },
+        zoom: 10
+      });
+
+
+    // Array of markers
+    var markers = [
+    {
+    coords:{lat: 16.295165, lng: 119.950026},
+    iconImage: "markers/hotel.png",
+    content: "<div style='float:center'><img src='hotel/anda.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Rullan Apartelle</b><br>Awag Road, Anda, Pangasinan<br><b>Rates:<b><br/><a href='https://www.booking.com/searchresults.en-gb.html?aid=389185;label=metagha-link-mapresultsPH-hotel-1224154_dev-desktop_los-1_bw-7_dow-Monday_defdate-0_room-0_lang-en_curr-PHP_gstadt-2_rateid-0_aud-102524334_cid-84;sid=8bd5e67621e2b05611156291bbed8311;checkin=2018-09-17;checkout=2018-09-18;city=-2408451;highlighted_hotels=1224154;hlrd=with_av;keep_landing=1;redirected=1;source=hotel&utm_campaign=PH&utm_content=los-1_bw-7_dow-Monday_lang-en_curr-PHP_gstadt-2_rateid-0_aud-102524334_cid-84&utm_medium=mapresults&utm_source=metagha&utm_term=hotel-1224154&'>Click here..</a></div>"
+    },
+    {
+    coords:{lat: 16.312278, lng:  120.012734},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/anda2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Sarmiento Beach House</b><br>Tondol White Sand Beach, Anda, Pangasinan<br><b>Rates:<b><br/><a href='https://www.sarmientobeachhouse.com/accomodation'>Click here..</a></div>"
+    },
+    {
+    coords:{lat: 16.289010, lng:  119.951692},
+    iconImage: "markers/hotel.png",
+    content: "<div style='float:center'><img src='hotel/anda3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Andatel Hotel and Restaurant</b><br>T19 Luna Street, Poblacion, Anda, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.313756, lng:  120.014122},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/anda4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Meoks Restobar</b><br>Anda, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.313784, lng:  120.018428},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='hotel/anda5.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>828 Gems Beach Resort</b><br>Tondol White Sand Beach, Anda, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.135560, lng:  119.776263},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='hotel/agno.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Agno Umbrella Rocks</b><br>Agno, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.116091, lng: 119.774401},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='hotel/agno2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Plumeria Resort</b><br>Agno, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.865225, lng: 120.243292},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/aguilar.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Goldkrist Resort</b><br>Romulo Hwy, Aguilar, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.893386, lng: 120.236841},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/aguilar2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>V Limos Eatery</b><br>Romulo Hwy, Aguilar, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.073246, lng: 120.438729},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san jacinto.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Vinzo Bistro</b><br>32 Ildefonso St, San Jacinto, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.073228, lng: 120.438853},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san jacinto2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Ya Hala Arabic Cuisine</b><br>32 Ildefonso St, San Jacinto, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.942684, lng: 120.580881},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/villasis.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Cuisinero</b><br>Villasis, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.893741, lng: 120.593007},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/villasis2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>The Good Samaritan Food Incorporated</b><br>Petron Villasis, McArthur Highway, Villasis, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 6.067005, lng: 120.534879},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/laoac.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Riverside Resort</b><br>Laoac, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.978109, lng: 120.572337},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Lisland Rainforest Resort</b><br>Urdaneta City, Pangasinan<br><b>Rates:<b><br/><a href='http://lislandresort.com/'>Click here..</a></div>"
+    },
+    {
+    coords:{lat: 15.987560, lng: 120.581901},
+    iconImage: "markers/hotel.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Mark's Hotel</b><br>Cayambanan Rd, Urdaneta City, Pangasinan<br><b>Rates:<b><br/><a href='https://www.agoda.com/pages/agoda/default/DestinationSearchResult.aspx?asq=vhrlagaqPUKAllPqX%2fb4lZftFC45E7zivLRafQGY8LUv1+hhQ0jnt67OTPKXn%2fDyFMgcY2a5TtfmNj6zKUPa+IanlEWPdTNvhRAleYDmaUG7N5JAzXcuXgQxjXuERO51JF58AHcFOjfPWXipL1qKQwL32eC1j1+7EcFqn0V%2fTYQD1RoKojV30JHrC3KqL%2fyVg9R6A5wPZR2PmYuKvq1Jumv1tUm7cRaV6KbKdDgBW5QHp4dyPbnV%2fwC8Pq6fnkrwXqGUKxLOSaW0bJeAyN0RcStZZkK1jt9wl9z1tPZSpmgDirDHZgok+Sz4NYJs5jTgWXYlgu2RA+b5capQ%2fwxCuQ%3d%3d&currency=PHP&cid=1731515'>Click here..</a></div>"
+    },
+    {
+    coords:{lat: 15.978249, lng: 120.590041},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Urdaneta Garden Resort</b><br>Manuel Roxas St, Urdaneta City, Pangasinan<br><b>Rates:<b><br/><a href='https://www.urdanetagardenresort.com/rooms'>Click here..</a></div>"
+    },
+    {
+    coords:{lat: 15.955203, lng: 120.576141},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Matutina - Gerry's Seafood House</b><br>Barangay Nancayasan, MacArthur Highway, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.976909, lng: 120.563542},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta5.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Urban District</b><br>#4 Lachica Street, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.954885, lng: 120.575943},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta6.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Dampa Sa Pangasinan - Seafood's Restaurant and Catering Services</b><br>Purok 4 Nancayasan, MacArthur Highway, Lungsod ng Urdaneta, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.969207, lng: 120.571821},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta7.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Food Camp Cafe</b><br>Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.962925, lng: 120.573038},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta8.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Ambassador Seafood Ihaw-Ihaw Restaurant</b><br>Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.945338, lng: 120.579927},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta9.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Max's Restaurant</b><br>MacArthur Highway, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.966580, lng: 120.572031},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta10.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Soundbox bar & restaurant</b><br>Nancayasan, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.982530, lng: 120.572019},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta11.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Cocolandia Restaurant</b><br>Mc Arthur Hwy, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.974372, lng: 120.571184},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/urdaneta12.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Roadhouse Steak & Bar</b><br>Sison St, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.825188, lng: 120.332209},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/urbiztondo.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Moreland Waterpark and Resort</b><br>Mabini St, Urbiztondo, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.929387, lng: 120.841585},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/umingan.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Luving's Tapsilog 24/7 Restaurant & Billiard Hall</b><br>Umingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.925937, lng: 120.841907},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/umingan2.png' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Pedritos Fried Chicken</b><br>Rizal St, Umingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.923652, lng: 120.822139},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/umingan3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Buy the Way</b><br>Umingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.027680, lng: 120.745608},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/tayug.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Chowking</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.028431, lng: 120.745181},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/tayug2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Jollibee</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.027269, lng: 120.745512},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/tayug3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Cambo Grill</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.021223, lng: 120.746512},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/tayug4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Shakey's Tayug</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.026992, lng: 120.743502},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/tayug6.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Piri Piri</b><br>Quezon Street, Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.030403, lng: 120.744773},
+    iconImage: "markers/resort.png",
+    content: "<div style='float:center'><img src='hotel/tayug7.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Villa Filipinas Resort</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.030403, lng: 120.744773},
+    iconImage: "markers/resort.png",
+    content: "<div style='float:center'><img src='hotel/tayug8.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Villa Filipinas Resort</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.030403, lng: 120.744773},
+    iconImage: "markers/resort.png",
+    content: "<div style='float:center'><img src='hotel/tayug8.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>A-1 Resort</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.071183, lng: 120.081222},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sual.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Suasalito Restaurant</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.064314, lng: 120.097086},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sual2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>The Garcia Grill Resto 3G</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.064314, lng: 120.097086},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sual2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>The Garcia Grill Resto 3G</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.061946, lng: 120.103149},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sual3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Teblong Restaurant</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.068145, lng: 120.089491},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sual4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>House of Asian Cuisine</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.071327, lng: 120.080116},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sual5.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Hilltopp Eatery</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.076984, lng: 120.096300},
+    iconImage: "markers/hotel.png",
+    content: "<div style='float:center'><img src='hotel/sual6.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Gapuz BnB Inn</b><br>120 Poblacion, Sual, Pangasinan<br><b>Rates:<b><br/><a href='https://www.booking.com/searchresults.en-gb.html?aid=389185;label=metagha-link-mapresultsPH-hotel-3710500_dev-desktop_los-1_bw-5_dow-Monday_defdate-0_room-0_lang-en_curr-PHP_gstadt-2_rateid-0_aud-102524334_cid-84;sid=8bd5e67621e2b05611156291bbed8311;checkin=2018-09-17;checkout=2018-09-18;city=-2420647;highlighted_hotels=3710500;hlrd=with_av;keep_landing=1;redirected=1;source=hotel&utm_campaign=PH&utm_content=los-1_bw-5_dow-Monday_lang-en_curr-PHP_gstadt-2_rateid-0_aud-102524334_cid-84&utm_medium=mapresults&utm_source=metagha&utm_term=hotel-3710500&'>Click here..</a></div>"
+    },
+    {
+    coords:{lat: 16.082784, lng: 120.108314},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/sual7.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Carthel Island Resort</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.141382, lng: 120.106383},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/sual8.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Masamirey Cove Resort</b><br>Sitio Masamirey, Sual, Pangasinan<br><b>Rates:<b><br/><a href='http://www.masamireycove.com/rooms/'>Click here..</a></div>"
+    },
+    {
+    coords:{lat: 15.979652, lng: 120.470687},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sta barbara.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Michelle Kambingan Restaurant</b><br>Santa Barbara, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.171210, lng: 120.518472},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Leeza's Restaurant</b><br>MacArthur Highway, Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.165145, lng: 120.521299},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>MJ Balasa Restaurant</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.159335, lng: 120.521383},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Balao Restaurant</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.146921, lng: 120.522873},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Camille's Restaurant and Bulaluhan</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.151948, lng: 120.522499},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison5.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Kuya Dons Grill and Restaurant</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.158256, lng: 120.522053},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison6.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Nice Eatery</b><br>MacArthur Highway, Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.179866, lng: 120.515348},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison7.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Viajeros Eatery</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.171296, lng: 120.517847},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison8.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Leeza's Annex</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.171080, lng: 120.517982},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/sison9.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Inday & Biday Bulaluhan-Kambingan</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.176474, lng: 120.515329},
+    iconImage: "markers/resort.png",
+    content: "<div style='float:center'><img src='hotel/sison10.JPEG' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>LIBERATO's Resort</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.984072, lng: 120.813618},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san quintin.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Wong's Panciteria</b><br>San Quintin, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.986499, lng: 120.816708},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san quintin2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Caraballo Springs Resort</b><br>San Quintin, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.971871, lng: 120.829674},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san quintin3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Ignacius Resort</b><br>San Quintin, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.996013, lng: 120.786069},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san quintin4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Carmesis Resort</b><br>San Quintin, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.982731, lng: 120.852343},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san quintin5.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Adventure Mountain Resort</b><br>San Quintin, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.072680, lng: 120.760776},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san nicolas.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Mejia's Resort</b><br>San Nicolas, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.065026, lng: 120.669235},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san manuel.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>BenteSilog</b><br>Rizal Street, San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.067324, lng: 120.666092},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san manuel2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Uncle Bob Restaurant</b><br>Rizal Street, San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.064433, lng: 120.678788},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san manuel3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Water Park Resort</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.063724, lng: 120.678841},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san manuel4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Orallo's Butao Spring Resort</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.063913, lng: 120.679447},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san manuel5.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Butao Resort</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.063586, lng: 120.680313},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san manuel6.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Villa Felisa Spring Resort</b><br>23 Sitio Butao Brgy. Guisit Sur, San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.065339, lng: 120.680312},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san manuel7.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>A&E Spring Resort</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.062916, lng: 120.680355},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='hotel/san manuel8.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Aqua Paradiso</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.113176, lng: 120.397380},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san fabian.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Panlasang Dalampasigan</b><br>Cayanga Bridge, San Fabian, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.121580, lng: 120.397278},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san fabian2.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Maui's Kambingan & Seafood Restaurant</b><br>Sagud-Bahley, San Fabian, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.119165, lng: 120.401016},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san fabian3.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Matthew's Noodle House</b><br>San Fabian, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.123114, lng: 120.410184},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san fabian4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Chekong-kim Restaurant</b><br>San Fabian, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.123114, lng: 120.410184},
+    iconImage: "markers/resto.png",
+    content: "<div style='float:center'><img src='hotel/san fabian4.jpg' height='200' width='280'></div><div style='float:center; padding: 10px;'><b>Chekong-kim Restaurant</b><br>San Fabian, Pangasinan</div>"
+    },
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+    }
+
+    // Add marker Function
+    function addMarker(props){
+       var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+        icon:props.iconImage
+      });
+    
+    // Check content
+    if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+            content:props.content, 
+            maxWidth: 300, 
+            maxHeight: 300
+        });
+
+    marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+        });
+
+    
+    // Searchbox
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('mapsearch'));
+
+    //Place change event on search box
+    google.maps.event.addListener(searchBox, 'places_changed', function(){
+      
+      //console.log(searchBox.getPlaces());
+      var places = searchBox.getPlaces();
+
+      //bound
+      var bounds = new google.maps.LatLngBounds();
+      var i, place;
+
+      for (i=0; place=places[i]; i++) {
+
+        //console.log(place.geometry.location);
+        bounds.extend(place.geometry.location);
+      }
+      map.fitBounds(bounds); //fit to bound
+      map.setZoom(20); //set zoom
+        });  
+        }  
+    }
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAyiED6i4cjfxPYsLOiJl3gnMujfjWAM08&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gala Galore (Pangasinan)</title>
+<style>
+    body{
+        background-color: gold; 
+    }
+    #map-canvas{
+        height:630px;
+        width:100%;
+    }
+    .container {
+        width: 560px;
+        height: 100vh;
+        background-color: gold;
+        margin: 0 auto;
+    }
+    input[type=text] {
+        color: black;
+        font-family: Berlin Sans FB;
+        width: 87%;
+        border--sizing:border--box;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 20px;
+        background: white;
+        background-image:url('image/search.png');
+        background-size:30px 30px;
+        background-position: 5px 5px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        margin-top: 10px;
+    }
+    .logo {
+    width: 555px;
+    padding: 5px;
+    }
+    .logo1 {
+    width: 200px;
+    padding: 0px;
+    }
+
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <img src="image/header5.png" alt="" class="logo">
+    </header>
+    <center><input type="text" id="mapsearch" placeholder="Search place here.." size="50"></center><br>
+    <div id="map-canvas"></div>
+    <br>
+    <header>
+        <center><img src="image/logo.png" alt="" class="logo1"></center>
+    </header>
+    
+<script>
+function initMap(){
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+          lat: 15.8949,
+          lng: 120.2863
+        },
+        zoom: 10
+      });
+
+
+    // Array of markers
+    var markers = [
+    {
+    coords:{lat: 16.116060, lng: 119.802583},
+    iconImage: "markers/market.png",
+    content: "<div style='float:center'></div><div style='float:center; padding: 10px;'><b>Agno Public Market</b><br/>Agno, Pangasinan</div>"
+    },
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+    }
+
+    // Add marker Function
+    function addMarker(props){
+       var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+        icon:props.iconImage
+      });
+    
+    // Check content
+    if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+            content:props.content, 
+            maxWidth: 300, 
+            maxHeight: 300
+        });
+
+    marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+        });
+
+    
+    // Searchbox
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('mapsearch'));
+
+    //Place change event on search box
+    google.maps.event.addListener(searchBox, 'places_changed', function(){
+      
+      //console.log(searchBox.getPlaces());
+      var places = searchBox.getPlaces();
+
+      //bound
+      var bounds = new google.maps.LatLngBounds();
+      var i, place;
+
+      for (i=0; place=places[i]; i++) {
+
+        //console.log(place.geometry.location);
+        bounds.extend(place.geometry.location);
+      }
+      map.fitBounds(bounds); //fit to bound
+      map.setZoom(15); //set zoom
+        });  
+        }  
+    }
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAyiED6i4cjfxPYsLOiJl3gnMujfjWAM08&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>

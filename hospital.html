@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gala Galore (Pangasinan)</title>
+<style>
+    body{
+        background-color: gold; 
+    }
+    #map-canvas{
+        height:630px;
+        width:100%;
+    }
+    .container {
+        width: 560px;
+        height: 100vh;
+        background-color: gold;
+        margin: 0 auto;
+    }
+    input[type=text] {
+        color: black;
+        font-family: Berlin Sans FB;
+        width: 87%;
+        border--sizing:border--box;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 20px;
+        background: white;
+        background-image:url('image/search.jpg');
+        background-size:30px 30px;
+        background-position: 5px 5px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        margin-top: 10px;
+    }
+    .logo {
+    width: 550px;
+    padding: 2px;
+    }
+    .logo1 {
+    width: 200px;
+    padding: 0px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <img src="image/header7.png" alt="" class="logo">
+    </header>
+    <center><input type="text" id="mapsearch" placeholder="Search place here.." size="50"></center><br>
+    <div id="map-canvas"></div>
+    <br>
+    <header>
+        <center><img src="image/logo.png" alt="" class="logo1"></center>
+    </header>
+<script>
+function initMap(){
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+          lat: 15.8949,
+          lng: 120.2863
+        },
+        zoom: 10
+      });
+
+
+    // Array of markers
+    var markers = [
+    {
+    coords:{lat: 16.267831, lng: 119.878842},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/bolinao.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bolinao Community Hospital</b><br/>Bolinao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.838874, lng: 120.200329},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center; padding: 10px;'><b>Zaratan - Jimenez Clinic and Hospital</b><br/>Gallego, Aguilar, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.130805, lng: 119.970664},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/alaminos.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Alaminos Doctors Hospital</b><br/>Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.165460, lng: 119.986161},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/alaminos3.png' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Western Pangasinan District Hospital</b><br/>Magsaysay, Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.016976, lng: 120.674718},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Asingan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Asingan Community Hospital</b><br/>Asingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.886717, lng: 120.678954},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center; padding: 10px;'><b>PRO-CARE MEDICAL CLINIC & INFIRMARY</b><br/>Balungao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.187684, lng: 119.859055},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Bani.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rural Health Unit 1</b><br/>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.811397, lng: 120.475840},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Bautista.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rural Health Center</b><br/>Poblacion East, Bautista, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.806003, lng: 120.457318},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Bayambang.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sto. Niño General Hospital</b><br/>Lopez Jaena, Bayambang, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.809482, lng: 120.444318},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center; padding: 10px;'><b>Bayambang District Hospital</b><br/>Magsaysay St, Bayambang, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.046822, lng: 120.591759},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Binalonan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>St Thomas Aquinas Medical & Dental Hospital</b><br/>Brgy Rd Sta Fe Subd, Binalonan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.049231, lng: 120.591241},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Binalonan2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Saballa - Rosario Hospital</b><br/>28 Mendoza St, Binalonan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.028442, lng: 120.269709},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Binmaley.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Binmaley Infirmary</b><br/>Rizal Sreet, Binmaley, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.029966, lng: 120.269288},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Binmaley2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Ramirez - Bautista Memorial Hospital</b><br/>Binmaley, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.954520, lng: 120.215410},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Bugallon.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bugallon Rural Health Unit 1</b><br/>N. Espino Street, Bugallon, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.116496, lng: 119.798955},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Agno.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rural Health Center Lying-In</b><br/>Agno, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.006335, lng: 119.874141},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dasol.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dasol Public Hospital</b><br/>Dasol, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.008259, lng:  120.359727},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Calasiao.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>SEÑOR DIVINO TESORO CENTER</b><br/>Calasiao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.037150, lng: 120.346762},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dagupan Doctors Villaflor Medical Hospital</b><br/>Mc Arthur Highway, Mayombo District, Dagupan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.041055, lng: 120.340459},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>NAZARETH GENERAL HOSPITAL</b><br/>203 Perez Blvd, Downtown District, Dagupan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.048421, lng: 120.341212},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>REGION 1 MEDICAL CENTER</b><br/>Arellano Street, Dagupan, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.046284, lng: 120.340517},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>The Medical City Pangasinan</b><br/>Nable St, Downtown District, Dagupan, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.041397, lng: 120.335738},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan5.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>JVF HOSPITAL</b><br/>Zamora Street corner Rivera Street, Downtown District, Dagupan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.041100, lng: 120.334033},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan5.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cuison Hospital Incorporated</b><br/>Burgos St, Downtown District, Dagupan, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.038989, lng: 120.334654},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan7.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dagupan Villaflor Hospital</b><br/>Duque Building, Burgos Street, Perez Blvd, Downtown District, Dagupan, Pangasinan</div>"
+    },
+      {
+    coords:{lat: 16.033447, lng: 120.332206},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan8.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Luzon Medical Center</b><br/>329 MAC ARTHUR HIGHWAY, Dagupan, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.033114, lng: 120.327757},
+    iconImage: "markers/hospital.png",
+    content: "</div><div style='float:center; padding: 10px;'><b>LMC Hospital</b><br/>Dagupan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.030935, lng: 120.329114},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan9.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>SPECIALIST GROUP HOSPITAL & TRAUMA CENTER</b><br/>Dagupan, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.030070, lng: 120.328830},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan10.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>DAGUPAN ORTHOPEDIC CENTER</b><br/>Dagupan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.046229, lng: 120.352533},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Dagupan11.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Medical Centrum Dagupan</b><br/>A.B. Fernandez East Avenue, Dagupan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.826311, lng: 119.906203},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Infanta.jng' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rural Health Unit</b><br/>Infanta, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.025535, lng: 120.146638},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Labrador.jng' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Labrador Municipal Hospital</b><br/>Labrador, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.014529, lng: 120.232339},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Lingayen.jng' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Jesus Nazarene General Hospital</b><br/>106 National Rd, Lingayen, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.018358, lng: 120.229326},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Lingayen2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Lingayen District Hospital</b><br/>Solis Street, Lingayen, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 16.021402, lng: 120.228821},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Lingayen3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sto. Nino De Casipit General Hospital</b><br/>Avenida Rizal W, Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.021443, lng: 120.234184},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Lingayen4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Urduja General Hospital</b><br/>Gov. Antonio U. Sison St., Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.022882, lng: 120.230219},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Lingayen4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Lingayen Sacred Heart Hospital</b><br/>Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.069227, lng: 119.940666},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/mabini.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mabini Municipal Health Office</b><br/>Mabini, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.158805, lng: 119.976304},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/alaminos2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>C and H Hospital</b><br/>Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.920790, lng: 120.426717},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Malasiqui.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Malasiqui Municipal Hospital</b><br/>Malasiqui, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.910841, lng: 120.416664},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Malasiqui2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rosario-Espinoza Family Clinic and Primary Care Facility</b><br/>Malasiqui, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.922467, lng: 120.413736},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Malasiqui3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Perpetual Help Hospital</b><br/>Montemayor Street, Malasiqui, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.036234, lng: 120.483193},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Manaoag.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Manaoag Community Hospital</b><br/>Maloko St, Manaoag, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.742187, lng: 120.325615},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Mangatarem.jfif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mangatarem District Hospital</b><br/>Mangatarem, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.795916, lng: 120.287798},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Mangatarem.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>MBP-BLESSED TRINITY GENERAL HOSPITAL, INC.</b><br/>Mangatarem, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.787809, lng: 120.293424},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Mangatarem2.jfif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Velasquez Hospital</b><br/>Mangatarem, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.026110, lng: 120.454175},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Mapandan.jfif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mapandan Rural Health Unit</b><br/>Municipal St, Mapandan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.024640, lng: 120.456251},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Mapandan2.jfif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mapandan Community Hospital</b><br/>Mapandan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.106681, lng: 120.540174},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Pozorrubio.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Pozorrubio Community Hospital</b><br/>Pozorrubio, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.883617, lng: 120.598517},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Rosales.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Marcelo Chan Memorial Hospital</b><br/>Mc Arthur Highway, Carmen, Rosales, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.882964, lng: 120.598816},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Rosales2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Del Carmen Medical Center</b><br/>Rosales, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.892164, lng: 120.633326},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Rosales3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rosales Municipal Infirmary Unit</b><br/>Burgos St, Rosales, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.954283, lng: 120.349797},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/san Carlos.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Pangasinan Provincial Hospital</b><br/>San Carlos City, Pangasinan</div>"
+    },
+     {
+    coords:{lat: 15.918961, lng: 120.356010},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/san Carlos2.jfif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Blessed Family Doctors General Hospital</b><br/>Barangay Ilang, Perez Blvd, San Carlos, Pangasinan</div>"
+    },
+      {
+    coords:{lat: 15.937542, lng: 120.346568},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/san Carlos3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Elguira General Hospital‎</b><br/>San Carlos City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.939978, lng: 120.345430},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/san Carlos4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Pangasinan Doctors Hospital</b><br/>San Carlos City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.920534, lng: 120.341672},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/san Carlos6.jfif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Virgen Milagrosa Medical Center</b><br/>34 Dr. Martin P. Posadas Avenue, San Carlos City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.063923, lng:  120.670507},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/san Manuel.jfif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dr. Laureano S. Perez Memorial Center</b><br/>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.985343, lng:  120.811542},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/san Quintin.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>El Corazon De Jesus Medical & Diagnostic Clinic</b><br/>Rizal Street, San Quintin, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.193362, lng:  120.515026},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Sison.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>NLAC Hospital</b><br/>MacArthur Highway, Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.172983, lng:  120.510090},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Sison2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sison Municipal Health Center</b><br/>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.001406, lng:  120.402582},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Sta. Barbara.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sta. Barbara RHU</b><br/>Santa Barbara, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.065459, lng:  120.095459},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Sual.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sual Health Center</b><br/>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.994198, lng:  120.723045},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/tayug.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tayug Family Hospital</b><br/>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.019531, lng: 120.742360},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/tayug2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Eastern Pangasinan District Hospital</b><br/>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.927452, lng: 120.839648},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/umingan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Umingan Community Hospital</b><br/>Burgos St, Umingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.907721, lng: 120.747559},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/umingan2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rural Health Unit II</b><br/>Umingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.900025, lng: 120.799981},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/umingan2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Umingan Medicare & Community Hospital</b><br/>Umingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.825261, lng: 120.335426},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/Urbiztondo.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Jesus' Healing Hand Hospital</b><br/>Rizal St, Urbiztondo, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.980523, lng: 120.571108},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/urdaneta.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Urdaneta Sacred Heart Hospital</b><br/>15 Mcarthur, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.974934, lng: 120.582046},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/urdaneta2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Urdaneta district hospital</b><br/>Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.973586, lng: 120.578093},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center; padding: 10px;'><b>Don Amadeo Perez Memorial Hospital</b><br/>Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.977769, lng: 120.563807},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/urdaneta3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Divine Mercy Hospital</b><br/>Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.973604, lng: 120.571302},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/urdaneta4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Metro Urdaneta Specialists</b><br/>MacArthur Highway, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.973604, lng: 120.571302},
+    iconImage: "markers/hospital.png",
+    content: "<div style='float:center'><img src='hospital/urdaneta4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Metro Urdaneta Specialists</b><br/>MacArthur Highway, Urdaneta City, Pangasinan</div>"
+    },
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+    }
+
+    // Add marker Function
+    function addMarker(props){
+       var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+        icon:props.iconImage
+      });
+    
+    // Check content
+    if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+            content:props.content, 
+            maxWidth: 300, 
+            maxHeight: 300
+        });
+
+    marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+        });
+
+    
+    // Searchbox
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('mapsearch'));
+
+    //Place change event on search box
+    google.maps.event.addListener(searchBox, 'places_changed', function(){
+      
+      //console.log(searchBox.getPlaces());
+      var places = searchBox.getPlaces();
+
+      //bound
+      var bounds = new google.maps.LatLngBounds();
+      var i, place;
+
+      for (i=0; place=places[i]; i++) {
+
+        //console.log(place.geometry.location);
+        bounds.extend(place.geometry.location);
+      }
+      map.fitBounds(bounds); //fit to bound
+      map.setZoom(15); //set zoom
+        });  
+        }  
+    }
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAyiED6i4cjfxPYsLOiJl3gnMujfjWAM08&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>

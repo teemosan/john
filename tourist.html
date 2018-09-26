@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gala Galore (Pangasinan)</title>
+<style>
+    body{
+        background-color: gold; 
+    }
+    #map-canvas{
+        height:630px;
+        width:100%;
+    }
+    .container {
+        width: 560px;
+        height: 100vh;
+        background-color: gold;
+        margin: 0 auto;
+    }
+    input[type=text] {
+        color: black;
+        font-family: Berlin Sans FB;
+        width: 87%;
+        border--sizing:border--box;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 20px;
+        background: white;
+        background-image:url('image/search.jpg');
+        background-size:30px 30px;
+        background-position: 5px 5px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        margin-top: 10px;
+    }
+    .logo {
+    width: 550px;
+    padding: 2px;
+    }
+    .logo1 {
+    width: 200px;
+    padding: 0px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <img src="image/header1.png" alt="" class="logo">
+    </header>
+    <center><input type="text" id="mapsearch" placeholder="Search place here.." size="50"></center><br>
+    <div id="map-canvas"></div>
+    <br>
+    <header>
+        <center><img src="image/logo.png" alt="" class="logo1"></center>
+    </header>
+<script>
+function initMap(){
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+          lat: 15.8949,
+          lng: 120.2863
+        },
+        zoom: 10
+      });
+
+
+    // Array of markers
+    var markers = [
+    {
+    coords:{lat: 16.134942, lng: 119.776195},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/agno2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Agno Umbrella Rocks</b><br>Agno, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.204451, lng: 120.040899},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/alaminos.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Hundred Islands National Park</b><br>Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.170394, lng: 120.013900},
+    iconImage: "markers/tree.png",
+    content: "<div style='float:center'><img src='tourist/alaminos3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mangrove Plantation</b><br>Bued, Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.156475, lng: 119.979322},
+    iconImage: "markers/house.png",
+    content: "<div style='float:center'><img src='tourist/alaminos4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Heritage Houses</b><br>San Jose Dr, Poblacion, Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.179467, lng: 120.045994},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/alaminos8.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bolo Beach</b><br>Pandan, Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.155353, lng: 119.978501},
+    iconImage: "markers/church.png",
+    content: "<div style='float:center'><img src='tourist/alaminos9.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>St. Joseph Cathedral</b><br>CP Garcia St, Poblacion, Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.155221, lng: 119.979284},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/alaminos10.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Alaminos City Plaza</b><br>Poblacion, Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.313982, lng: 120.018088},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/anda.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tanduyong Island</b><br>Tondol, Anda, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.360436, lng: 119.988207},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/anda.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cangaluyan Island</b><br> Carot, Anda, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.068085, lng: 119.859300},
+    iconImage: "markers/Falls.png",
+    content: "<div style='float:center'><img src='tourist/Burgos.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sangbay Falls</b><br>Burgos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.994848, lng: 119.760493},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/Burgos2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Death Pool</b><br>Burgos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.988863, lng: 119.763324},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/Burgos3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cabongaoan Beach</b><br>Burgos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.834003, lng: 120.173884},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/Burgos3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mapita Viewdeck</b><br>Aguilar, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.834003, lng: 120.173884},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/aguilar.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mapita Viewdeck</b><br>Aguilar, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.849193, lng: 120.172866},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/aguilar2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mapita Falls</b><br>Aguilar, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.849193, lng: 120.172866},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/aguilar2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mapita Falls</b><br>Aguilar, Pangasinan</div>"
+    },
+    
+    {
+    coords:{lat: 16.156475, lng: 119.979322},
+    iconImage: "markers/house.png",
+    content: "<div style='float:center'><img src='tourist/alaminos4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Alaminos Ancestral Houses</b><br>San Jose Dr, Poblacion, Alaminos, Pangasinan</div>"
+    },
+    
+    {
+    coords:{lat: 16.246389, lng: 119.925988},
+    iconImage: "markers/forest.png",
+    content: "<div style='float:center'><img src='tourist/bani.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bangrin Mangrove Farm (Marine Protected Area)</b><br>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.246389, lng: 119.925988},
+    iconImage: "markers/forest.png",
+    content: "<div style='float:center'><img src='tourist/bani.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bangrin Mangrove Farm</b><br>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.172202, lng: 120.011086},
+    iconImage: "markers/forest.png",
+    content: "<div style='float:center'><img src='tourist/alaminos7.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bued Mangrove Park</b><br>Alaminos, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.221577, lng: 119.832770},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/bani2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Busay Falls</b><br>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.286433, lng: 119.791190},
+    iconImage: "markers/cave.png",
+    content: "<div style='float:center'><img src='tourist/bani3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Nalsoc Cave</b><br>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.254424, lng: 119.775566},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/bani4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Surip Beach</b><br>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.254531, lng: 119.781905},
+    iconImage: "markers/cross.png",
+    content: "<div style='float:center'><img src='tourist/bani5.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>The Redeemer's Cross</b><br>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.276778, lng: 119.772732},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/bani6.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Colayo White Sand Beach</b><br>Bani, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.226717, lng: 119.774709},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center; padding: 10px;'><b>Tobong Beach</b><br>Bani, Pangasinan</div>"
+    },
+    
+    {
+    coords:{lat: 15.865570, lng: 1120.687217},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/Balungao.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Balungao Zipline</b><br>Napudot Rd, Balungao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.867284, lng: 120.686312},
+    iconImage: "markers/hotspring.png",
+    content: "<div style='float:center'><img src='tourist/Balungao2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Balungao Hot and Cold Springs</b><br>Balungao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.888424, lng: 120.239044},
+    iconImage: "markers/church.png",
+    content: "<div style='float:center'><img src='tourist/aguilar3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>St Joseph the Patriarch Parish</b><br>Romulo Hwy, Aguilar, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.005793, lng: 120.668522},
+    iconImage: "markers/church.png",
+    content: "<div style='float:center'><img src='tourist/asingan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>St. Louis Bertrand Parish Church</b><br>Asingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.849499, lng: 120.398215},
+    iconImage: "markers/church.png",
+    content: "<div style='float:center'><img src='tourist/Basista.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mary Help of Christians Parish</b><br>Basista, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.810071, lng: 120.457797},
+    iconImage: "markers/river.png",
+    content: "<div style='float:center; padding: 10px;'><b>Bayambang riverbanks</b><br>Bayambang, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.809272, lng: 120.456964},
+    iconImage: "markers/fountain.png",
+    content: "<div style='float:center'><img src='tourist/Bayambang.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dolphin fountain</b><br>Bayambang, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.811688, lng: 120.452408},
+    iconImage: "markers/forest.png",
+    content: "<div style='float:center'><img src='tourist/Bayambang2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Little Baguio</b><br>Bayambang, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.045570, lng: 120.593012},
+    iconImage: "markers/bonsai.png",
+    content: "<div style='float:center'><img src='tourist/binalonan3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Binalonan Bonsai Park</b><br>Binalonan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.045074, lng: 120.269646},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/binmaley.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Binmaley Beach</b><br>Binmaley, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.305920, lng: 119.860193},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/bolinao.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bolinao Falls 1</b><br>Samang Norte, Bolinao Trail, Bolinao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.307791, lng: 119.865332},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/bolinao2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bolinao Falls 2</b><br>Samang Norte, Bolinao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.307500, lng: 119.869847},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/bolinao3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bolinao Falls 3</b><br>River, Bolinao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.343568, lng: 119.803805},
+    iconImage: "markers/cave.png",
+    content: "<div style='float:center'><img src='tourist/bolinao4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Enchanted Cave</b><br>Patar Rd, Bolinao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.302821, lng: 119.780884},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/bolinao5.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Patar Beach Bolinao</b><br>West Philippine Sea</div>"
+    },
+    {
+    coords:{lat: 16.307131, lng: 119.785595},
+    iconImage: "markers/Lighthouse.png",
+    content: "<div style='float:center'><img src='tourist/bolinao6.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cape Bolinao Lighthouse</b><br>Bolinao, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.986206, lng: 120.223758},
+    iconImage: "markers/river.png",
+    content: "<div style='float:center'><img src='tourist/bugallon.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bugallon Riverside</b><br>Bugallon, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.936904, lng: 120.173167},
+    iconImage: "markers/cross.png",
+    content: "<div style='float:center'><img src='tourist/bugallon2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mt. Zion Pilgrim Mountain</b><br>Mt Zion Rd, Bugallon, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.060182, lng: 120.339364},
+    iconImage: "markers/river.png",
+    content: "<div style='float:center'><img src='tourist/dagupan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dawel River Cruise</b><br>Bonuan, Dagupan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.038359, lng: 120.342382},
+    iconImage: "markers/farm.png",
+    content: "<div style='float:center'><img src='tourist/dagupan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>LIWANAG FARMS</b><br>Perez Market Site, Barangay Herrero Perez, Dagupan City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.085686, lng: 120.350104},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/dagupan2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tondaligan Park</b><br>Bonuan, Dagupan City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.931401, lng: 119.783485},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/dasol.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tambobong Beach</b><br>Dasol, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.978763, lng: 119.838032},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/dasol2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Malacapas Viewdeck</b><br>Dasol, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.986666, lng: 119.908046},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='tourist/dasol2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dasoland</b><br>Dasol, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.843752, lng: 119.912605},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/infanta.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Payong Payong</b><br>Infanta, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.814435, lng: 119.882771},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/infanta2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sabangan Island</b><br>Nayom, Infanta, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.983761, lng: 120.132955},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/labrador2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tinakayanan Falls</b><br>Labrador, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.030403, lng: 120.125505},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/labrador3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tandoc Falls</b><br>Labrador, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.036564, lng: 120.231107},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/lingayen.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Pangasinan Baywalk</b><br>Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.033395, lng: 120.228822},
+    iconImage: "markers/Auditorium.png",
+    content: "<div style='float:center'><img src='tourist/lingayen2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sison Auditorium</b><br>Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.033516, lng: 120.231576},
+    iconImage: "markers/Auditorium.png",
+    content: "<div style='float:center'><img src='tourist/lingayen3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Pangasinan Provincial Capitol</b><br>Alvear E, Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.034216, lng: 120.230984},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/lingayen4.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Veterans Memorial Park</b><br>Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.034627, lng: 120.232337},
+    iconImage: "markers/Auditorium.png",
+    content: "<div style='float:center'><img src='tourist/lingayen5.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Urduja House</b><br>Poblacion, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.030929, lng: 120.232481},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/lingayen6.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Lingayen Park</b><br>Maramba Blvd, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.035801, lng: 120.214175},
+    iconImage: "markers/pool.png",
+    content: "<div style='float:center'><img src='tourist/lingayen7.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Aquatica Marina Water Park</b><br>Don Martin Domingo Street, Lingayen, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.009583, lng: 119.938403},
+    iconImage: "markers/cave.png",
+    content: "<div style='float:center'><img src='tourist/mabini.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sto. Rosario Cave</b><br>San Pedro, Mabini, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.006685, lng: 119.942797},
+    iconImage: "markers/cave.png",
+    content: "<div style='float:center'><img src='tourist/mabini2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cabalyorisa Cave</b><br>Brgy. Barlo, Mabini, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.041505, lng: 119.941733},
+    iconImage: "markers/hotspring.png",
+    content: "<div style='float:center; padding: 10px;'><b>Ambetel Natural Spring</b><br>De Guzman, Mabini, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.052965, lng: 119.959057},
+    iconImage: "markers/cave.png",
+    content: "<div style='float:center'><img src='tourist/mabini3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cacupangan Cave</b><br>Mabini, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.044011, lng: 120.488223},
+    iconImage: "markers/church.png",
+    content: "<div style='float:center'><img src='tourist/Manaoag.png' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Minor Basilica of Our Lady of the Rosary of Manaoag</b><br>Milo St, Manaoag, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.069809, lng: 120.404342},
+    iconImage: "markers/Monument.png",
+    content: "<div style='float:center'><img src='tourist/Mangaldan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Rizal Monument</b><br>Rizal Ave, Mangaldan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.669833, lng: 120.239739},
+    iconImage: "markers/hotspring.png",
+    content: "<div style='float:center'><img src='tourist/mangatarem.png' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Manleluag National Park</b><br>Mangatarem, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.709304, lng: 120.332950},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/mangatarem2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bundok Sapatos</b><br>Mangatarem, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.709304, lng: 120.332950},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/mangatarem2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bundok Sapatos</b><br>Mangatarem, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.026710, lng: 120.453674},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/mapandan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Mapandan Peoples Park</b><br>Municipal St, Mapandan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.058912, lng: 120.826915},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/Natividad.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sky Plaza</b><br>Natividad, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.081437, lng: 120.850661},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/Natividad2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Takup-Takup Falls</b><br>Natividad, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.068898, lng: 120.840735},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/Natividad3.jpeg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bachelor Nadividad Waterfalls</b><br>Natividad, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.068898, lng: 120.840735},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/Natividad3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Bachelor Nadividad Waterfalls</b><br>Natividad, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.986232, lng: 120.854041},
+    iconImage: "markers/river.png",
+    content: "<div style='float:center'><img src='tourist/san quintin.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Dipalo River</b><br>San Quintin, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.850432, lng: 120.626269},
+    iconImage: "markers/cross.png",
+    content: "<div style='float:center'><img src='tourist/rosales.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Our Lady of Rosales Grotto</b><br>Rosales, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.926446, lng: 120.347133},
+    iconImage: "markers/church.png",
+    content: "<div style='float:center'><img src='tourist/san carlos2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Saint Dominic Parish Church</b><br>Malong St, San Carlos City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.132327, lng: 120.398955},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/san fabian.png' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>San Fabian Beach</b><br>San Fabian, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.132327, lng: 120.398955},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/san fabian.png' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>San Fabian Beach</b><br>San Fabian, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.147913, lng: 120.681166},
+    iconImage: "markers/dam.png",
+    content: "<div style='float:center'><img src='tourist/san manuel.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>San Roque Dam</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.147913, lng: 120.681166},
+    iconImage: "markers/dam.png",
+    content: "<div style='float:center'><img src='tourist/san manuel.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>San Roque Dam</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.061312, lng: 120.652057},
+    iconImage: "markers/electricity.png",
+    content: "<div style='float:center'><img src='tourist/san manuel2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>National Grid Corporation of the Philippines</b><br>San Manuel, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.117366, lng: 120.809665},
+    iconImage: "markers/river.png",
+    content: "<div style='float:center'><img src='tourist/san nicolas.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cabalisian River</b><br>San Nicolas, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.179992, lng: 120.558942},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/sison.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Antong Falls</b><br>Sison, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.071504, lng: 120.081336},
+    iconImage: "markers/mountain.png",
+    content: "<div style='float:center'><img src='tourist/sual.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sual View Deck</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.140355, lng: 120.106501},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/sual2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Masamirey White Sand Beach</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.115793, lng: 120.111139},
+    iconImage: "markers/beach.png",
+    content: "<div style='float:center'><img src='tourist/sual3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Cabalitian Island</b><br>Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.124288, lng: 120.100459},
+    iconImage: "markers/powerplant.png",
+    content: "<div style='float:center'><img src='tourist/sual4.gif' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Sual Power Station</b><br>Barangay Pangascasan, Sual, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.973414, lng: 120.757920},
+    iconImage: "markers/flower.png",
+    content: "<div style='float:center'><img src='tourist/tayug.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tayug Sunflower Eco Park</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.973828, lng: 120.757879},
+    iconImage: "markers/flower.png",
+    content: "<div style='float:center'><img src='tourist/tayug2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Allied Botanical Corporation</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.027753, lng: 120.744127},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/tayug3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Tayug Plaza</b><br>Tayug, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.959214, lng: 120.894889},
+    iconImage: "markers/falls.png",
+    content: "<div style='float:center'><img src='tourist/umingan.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Diket Falls</b><br>Umingan, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.992512, lng: 120.605876},
+    iconImage: "markers/flower.png",
+    content: "<div style='float:center'><img src='tourist/Urdaneta2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Uncle Cacti- Urdaneta</b><br>#157 Brgy. Bolaoen, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.975400, lng: 120.564446},
+    iconImage: "markers/Auditorium.png",
+    content: "<div style='float:center'><img src='tourist/Urdaneta3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Museo de Urdaneta</b><br>Alexander St, Urdaneta City, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.051930, lng: 120.554223},
+    iconImage: "markers/flower.png",
+    content: "<div style='float:center'><img src='tourist/Laoac.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Pulido's Garden</b><br>Laoac, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 16.050956, lng: 120.547518},
+    iconImage: "markers/church.png",
+    content: "<div style='float:center'><img src='tourist/Laoac2.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Holy Cross Parish</b><br>Laoac, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.900672, lng: 120.5865418},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/Laoac3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Villasis Town Park</b><br>Villasis, Pangasinan</div>"
+    },
+    {
+    coords:{lat: 15.900672, lng: 120.5865418},
+    iconImage: "markers/park.png",
+    content: "<div style='float:center'><img src='tourist/Laoac3.jpg' height='200' width='250'></div><div style='float:center; padding: 10px;'><b>Villasis Town Park</b><br>Villasis, Pangasinan</div>"
+    }
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+    }
+
+    // Add marker Function
+    function addMarker(props){
+       var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+        icon:props.iconImage
+      });
+    
+    // Check content
+    if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+            content:props.content, 
+            maxWidth: 300, 
+            maxHeight: 300
+        });
+
+    marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+        });
+
+    
+    // Searchbox
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('mapsearch'));
+
+    //Place change event on search box
+    google.maps.event.addListener(searchBox, 'places_changed', function(){
+      
+      //console.log(searchBox.getPlaces());
+      var places = searchBox.getPlaces();
+
+      //bound
+      var bounds = new google.maps.LatLngBounds();
+      var i, place;
+
+      for (i=0; place=places[i]; i++) {
+
+        //console.log(place.geometry.location);
+        bounds.extend(place.geometry.location);
+      }
+      map.fitBounds(bounds); //fit to bound
+      map.setZoom(15); //set zoom
+        });  
+        }  
+    }
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?AIzaSyAyiED6i4cjfxPYsLOiJl3gnMujfjWAM08&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>
